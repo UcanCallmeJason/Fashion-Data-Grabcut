@@ -2,7 +2,6 @@
 """
 Created on Sun Nov 11 19:44:50 2018
 인스타그램 크롤링
-@author: 송시차니
 """
 '''
 import sys
