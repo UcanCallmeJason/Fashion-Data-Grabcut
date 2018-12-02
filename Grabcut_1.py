@@ -2,7 +2,6 @@
 """
 Created on Sun Nov 18 17:02:28 2018
 Grabcut을 이용한 배경제거
-@author: 송시찬
 """
 
 import numpy as np
