@@ -2,7 +2,6 @@
 """
 Created on Sun Nov 11 17:56:47 2018
 
-@author: 송시차니
 """
 
 import sys
