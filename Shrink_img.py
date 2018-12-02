@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Nov 10 20:29:44 2018
-
-@author: 송시차니
 """
 
 import sys
