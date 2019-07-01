@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Nov 18 17:02:28 2018
-Grabcut을 이용한 배경제거
 @author: 송시찬
 """
-# 해당 소스의 사용방법은 github에 기재해두었음.
-
 import numpy as np
 import sys
 sys.path.append("D:\Lib\site-packages")
