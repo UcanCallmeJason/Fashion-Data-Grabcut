@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sun Nov 18 17:02:28 2018
-@author: 송시찬
+@author: jason
 """
 import numpy as np
 import sys
-sys.path.append("D:\Lib\site-packages")
+sys.path.append("Target Directory")
 import cv2
 import os
 
-#픽셀 컬러 임계값 설정
+#fix threshold of pixels
 BLUE, GREEN, RED, BLACK, WHITE = (255,0,0), (0,255,0), (0,0,255), (0,0,0), (255,255,255)
-DRAW_BG = {'color':BLACK, 'val':0} #배경 검은선으로 그리기
-DRAW_FG = {'color':WHITE, 'val':1} #전경 하얀선으로 그리기
+DRAW_BG = {'color':BLACK, 'val':0} #draw background as black line
+DRAW_FG = {'color':WHITE, 'val':1} #draw foreground as white line
 
-rect = (0, 0, 1, 1) #전경객체의 직사각형의 좌표
+rect = (0, 0, 1, 1) #전경객체의 직사각형의 좌표 location of square in background 
 drawing = False
 rectangle = False
 rect_over = False
@@ -22,13 +22,13 @@ rect_or_mask = 100 # 배경 / 전경의 영역을 지정하는 마스크
 value = DRAW_FG
 thickness = 3
 
-# 마우스로 추출 설정하는 함수
+# 마우스로 추출 설정하는 함수 
 def onMouse(event, x, y, flags, param):
     # 전역 변수 선언
     global ix, iy, img, img2, drawing, value, mask, rectangle
     global rect, rect_or_mask, rect_over
     
-    # R키를 누르면 모든 작업을 리셋하고 처음으로 돌아감.
+    # Click 'R' button then reset all.
     if event == cv2.EVENT_RBUTTONDOWN:
         rectangle = True
         ix, iy = x, y
@@ -72,23 +72,22 @@ def onMouse(event, x, y, flags, param):
 
 import glob
 
-# grabcut 알고리즘
+# grabcut 
 def grabcut():
-    
-    # 전역변수 선언
+  
     global ix, iy, img, img2, drawing, value, mask, rectangle
     global rect, rect_or_mask, rect_over
-    number = 1 # 최종 저장된 사진의 순번을 위해
+    number = 1 #for the number of last saved image
     
-    # 폴더의 파일 리스트 읽어오기(jpg 파일을 읽어옴)
-    path_dir = 'D:\Clothes image\Minimal_Look\Train/*.jpg'
+    # Read JPG images from directory
+    path_dir = 'Target Directory*.jpg'
     file_list = glob.glob(path_dir)
     for file in file_list:
-        # 입력이미지 읽어오기
+        
         img = cv2.imread(file)
-        if img is None: # 사진이 없을경우 종료 / 외부 루프는 종료하지 않으므로 다음 디렉토리로 넘아감
+        if img is None:
             break
-        img2 = img.copy() # mask를 만들기 위해 복사본 만듬.
+        img2 = img.copy() #make copy for mask
     
         mask = np.zeros(img.shape[:2], dtype=np.uint8)
         output = np.zeros(img.shape, np.uint8)
@@ -104,10 +103,10 @@ def grabcut():
             cv2.imshow('output', output)
             cv2.imshow('input', img)
         
-            # 키보드 입력을 1밀리세컨드 기다림. 
+            # Wait key event  
             k = cv2.waitKey(1) & 0xFF
             
-            #esc 누를 시 다음 사진으로 작업이 넘어감.
+            # Pass next step when click ESC.
             if k == 27:
                 cv2.destroyAllWindows()
                 break
